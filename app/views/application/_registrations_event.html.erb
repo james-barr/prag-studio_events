@@ -1,0 +1,39 @@
+<article>
+  <header>
+    <h2>
+      <%= pluralize @registrations.count, "registration" %> for event: <%= link_to @event.name, @event %>
+    </h2>
+  </header>
+  <p>
+    <% @registrations.each do |r| %>
+      <p>
+        <table>
+          <tr>
+            <th>
+              Name
+            </th>
+            <td>
+              <%= mail_to r.email, r.name %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Location
+            </th>
+            <td>
+              <%= r.location %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              How heard
+            </th>
+            <td>
+              <%= r.how_heard %>
+            </td>
+          </tr>
+        </table>
+      </p>
+    <% end %>
+  </p>
+</article>

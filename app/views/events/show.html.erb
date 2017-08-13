@@ -1,0 +1,64 @@
+<article class="event">
+  <header>
+    <h1>
+      <h2><%= @event.name %></h2>
+      <h3><%= pluralize (@event.spots_left + 1), "spot" %> remaining</h3>
+      <%= image_for(@event) %>
+    </h1>
+  </header>
+
+  <table class="event-info">
+    <tr>
+      <th>
+        Description
+      </th>
+      <td>
+        <%= @event.description %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Location
+      </th>
+      <td>
+        <%= @event.location %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Price
+      </th>
+      <td>
+        <%= format_price @event %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Start time
+      </th>
+      <td>
+        <%= @event.starts_at %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Total Capacity
+      </th>
+      <td>
+        <%= @event.capacity %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= link_to "Who's registered", event_registrations_path(@event) %>
+  </p>
+</article>
+
+<%= register_link(@event) %>
+
+<%= link_to "Edit", edit_event_path(@event) %>
+<%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure?"} %>
+<br />
+<p>
+  <%= link_to "Register for event", new_event_registration_path(@event) %>
+</p>

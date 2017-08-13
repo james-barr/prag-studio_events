@@ -1,0 +1,38 @@
+<article>
+  <header>
+    <h2>
+      Register for Event
+    </h2>
+  </header>
+
+  <%= form_for([@event, @registration]) do |f| %>
+    <fieldset>
+      <ul>
+        <li>
+          <%= f.label :name  %>
+          <%= f.text_field :name, size: 40  %>
+        </li>
+        <li>
+          <%= f.label :email %>
+          <%= f.text_field :email, size: 40 %>
+        </li>
+        <li>
+          <%= f.label :location %>
+          <%= f.text_field :location %>
+        </li>
+        <li>
+          <%= f.label :how_heard %>
+          <%= f.select :how_heard, Registration::How_heard_options,
+          prompt: "Pick one" %>
+        </li>
+      </ul>
+      <p>
+        <%= f.submit %>
+        <%= link_to "Cancel", events_path %>
+      </p>
+    </fieldset>
+
+
+  <% end %>
+
+</article>

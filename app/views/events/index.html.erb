@@ -1,0 +1,53 @@
+
+<header>
+   <h1><%= pluralize @events.count, "Event" %> </h1>
+</header>
+
+<article class="event">
+  <% @events.each do |event| %>
+    <header>
+      <h2>
+        <%= link_to event.name, event_path(event) %>
+      </h2>
+      <h3>
+        <%= pluralize event.spots_left, "Spot" %> remaining
+      </h3>
+      <%= image_for(event) %>
+    </header>
+    <table class="event-info">
+      <tr>
+        <th>
+          Location:
+        </th>
+        <td>
+          <%= event.location %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Description:
+        </th>
+        <td>
+          <%= truncate event.description, length: 30, separator: " " %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Start time:
+        </th>
+        <td>
+          <%= event.starts_at %>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Price:
+        </th>
+        <td>
+          <%= format_price event %>
+        </td>
+      </tr>
+    </table>
+    <br />
+  <% end %>
+</article>
