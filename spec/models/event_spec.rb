@@ -137,40 +137,6 @@ describe "An event" do
     expect(event.errors[:capacity].any?).to eq(false)
   end
 
-  it "validates that the image file can be left blank" do
-    event = Event.new image_file_name: ""
-
-    event.valid?
-
-    expect(event.errors[:image_file_name].any?).to eq false
-  end
-
-  it "validates that image file can't end with non-allowed pattern" do
-    event = Event.new image_file_name: "ais.yml"
-
-    event.valid?
-
-    expect(event.errors[:image_file_name].any?).to eq true
-  end
-
-  it "validates that image file can end with gif, png,or jpg and can have caps
-  or other 'word' characters" do
-    image_name = ["x.gif", "kittycat1.jpg", ".1.png", "AAA.jpg"]
-    image_name.each do |file|
-      event = Event.new image_file_name: file
-      event.valid?
-      expect(event.errors[:image_file_name].any?).to eq false
-    end
-  end
-
-  it "validates that image cannot just be file extension" do
-    event = Event.new image_file_name: ".gif"
-
-    event.valid?
-
-    expect(event.errors[:image_file_name].any?).to eq true
-  end
-
   it "is valid with all valid movie attributes" do
     event = Event.new event_attributes
     event.valid?

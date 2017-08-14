@@ -19,9 +19,11 @@
     <%= f.label :starts_at %>
     <%= f.date_select :starts_at %>
     <br />
-    <%= f.label :image_file_name %>
-    <%= f.text_field :image_file_name, size: 30,
-              placeholder: "GIF, JPG, or PNG file name" %>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <br />
+    Current Image: 
+    <%= image_for(@event) %>
     <br />
     <%= f.label :capacity %>
     <%= f.number_field :capacity %>

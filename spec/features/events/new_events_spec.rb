@@ -11,7 +11,7 @@ describe "Create an event" do
     fill_in "Location", with: "Denver, CO"
     fill_in "Price", with: 150.00
     select (Time.now.year - 1).to_s, :from => "event_starts_at_1i"
-    fill_in "Image file name", with: "placeholder.png"
+    attach_file "Image", "#{Rails.root}/app/assets/images/placeholder.png"
     fill_in "Capacity", with: 2
 
     click_button "Create Event"
