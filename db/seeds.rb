@@ -55,3 +55,24 @@ r3 = e2.registrations.create!(
   how_heard: Registration::How_heard_options.sample,
   location: "Montana, CA",
 )
+
+User.create!([
+  {
+    name: "Don",
+    email: "d@g",
+    password: "x",
+    password_confirmation: "x",
+  },
+  {
+    name: "Al",
+    email: "al@x",
+    password: "x",
+    password_confirmation: "x",
+  },
+  {
+    name: "Gary",
+    email: "g@y",
+    password: "y",
+    password_confirmation: "y",
+  },
+  ])

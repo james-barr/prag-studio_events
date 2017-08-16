@@ -30,13 +30,6 @@ describe "viewing an individual event" do
     expect(page).to have_text("Free")
   end
 
-  it "shows the placeholder image if none is provided" do
-    event = Event.create event_attributes(image_file_name: nil)
-
-    visit event_url(event)
-
-    expect(page).to have_selector "img[src*=placeholder]"
-  end
 
   it "shows the placeholder capacity of 1 if none is provided" do
     event = Event.create event_attributes4

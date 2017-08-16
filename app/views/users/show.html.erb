@@ -1,0 +1,38 @@
+<header>
+  <h2>
+    User name: <%= @user.name %>
+  </h2>
+</header>
+
+<article>
+  <table>
+    <tr>
+      <th>
+        User Name:
+      </th>
+      <td>
+        <%= @user.name %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        User Email:
+      </th>
+      <td>
+        <%= @user.email %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        User Since:
+      </th>
+      <td>
+        <%= created_at_present @user %>
+      </td>
+    </tr>
+  </table>
+</article>
+
+<p>
+  <%= link_to "Delete User", user_path(@user), data: {:confirm => "Are you sure?"}, :method => :delete %>
+</p>

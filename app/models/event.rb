@@ -12,7 +12,7 @@ class Event < ApplicationRecord
   validates :capacity, numericality: {only_integer: true, greater_than: 0}
 
   validates_attachment :image,
-    :content_type => { :content_type => ['image/jpeg', 'image/png']},
+    :content_type => { :content_type => ['image/jpeg', 'image/png'] },
     :size => { :less_than => 1.megabyte }
 
   def free?
