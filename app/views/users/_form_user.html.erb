@@ -1,0 +1,32 @@
+<%= render 'errors', object: object %>
+
+<%= form_for object do |f| %>
+  <ul>
+    <li>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </li>
+    <li>
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </li>
+    <li>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </li>
+    <li>
+      <%= f.label :password_confirmation, "Confirm Password" %>
+      <%= f.password_field :password_confirmation %>
+    </li>
+  </ul>
+  <p>
+    <% if object.new_record? %>
+      <%= f.submit "Create Account" %>
+    <% else %>
+      <%= f.submit "Update Account" %>
+    <% end %>
+  </p>
+
+<% end %>
+
+<%= link_to "Cancel", users_path %>

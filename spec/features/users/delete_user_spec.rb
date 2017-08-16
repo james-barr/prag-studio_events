@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Deleting a user: " do
 
-  fit "deletes a user from the db, redirects to user index, displays a flash, and doesn't show the user's info" do
+  it "deletes a user from the db, redirects to user index, displays a flash, and doesn't show the user's info" do
     u = User.create! user_attributes
     u2 = User.create! user_attributes2
     visit user_path(u)

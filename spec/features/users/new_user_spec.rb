@@ -3,15 +3,28 @@ require "rails_helper"
 describe "Creating new user: " do
 
   it "shows all required fields" do
-    visit new_user
+    visit new_user_path
     expect(page).to have_text "Name"
     expect(page).to have_text "Email"
     expect(page).to have_text "Password"
-    expect(page).to have_text "Password confirmation"
+    expect(page).to have_text "Confirm Password"
   end
 
-  it "fails if all fields are not provided & an error messages appears" 
+  it "fails if all fields are blank & error messages appears" do
+    visit signup_path
+    click_button "Create Account"
+    expect(current_path).to eq users_path
+    e(page).to have_text "4 errors"
+  end
 
-  it "creates the user and redirects to user show with a success flash, if no issues"
-
+  it "creates the user and redirects to user show with a success flash, if no issues" do
+    visit signup_path
+    fill_in "Name", with: "C"
+    fill_in "Email", with: "w@w"
+    fill_in "Password", with: "X"
+    fill_in "Confirm Password", with: "X"
+    click_button "Create Account"
+    e(current_path).to eq user_path(User.first)
+    e(page).to have_text "signed up"
+  end
 end

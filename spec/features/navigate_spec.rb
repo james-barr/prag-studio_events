@@ -68,15 +68,21 @@ describe "Navigating events" do
   it "navigates from events index to users index (aside)" do
     visit events_path
     click_link "All Users"
-    e(current_path).to eq users_path
+    e(current_path).to eq(users_path)
   end
 
   it "navigates from events show to new user (aside)" do
     e = Event.create event_attributes
     visit event_path(e)
-    click_link "New User"
-    e(current_path).to eq new_user_path
+    click_link "Signup"
+    e(current_path).to eq signup_path
   end
 
+  it "the user form's cancel button brings the user back to the user index" do
+    u = User.create! user_attributes
+    visit new_user_path(u)
+    click_link "Cancel"
+    e(current_path).to eq users_path
+  end
 
 end

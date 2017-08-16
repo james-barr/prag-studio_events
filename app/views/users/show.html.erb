@@ -36,3 +36,7 @@
 <p>
   <%= link_to "Delete User", user_path(@user), data: {:confirm => "Are you sure?"}, :method => :delete %>
 </p>
+
+<p>
+  <%= link_to "Edit User", edit_user_path(@user) %>
+</p>

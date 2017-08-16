@@ -11,8 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "You're signed up!"
-      redirect_to @user
+      redirect_to @user, notice: "You're signed up!"
     else
       render 'new'
     end
@@ -25,8 +24,20 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    flash[:danger] = "User successfully deleted."
-    redirect_to users_path
+    redirect_to users_path, danger: "User successfully deleted."
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: "User updated successfully"
+    else
+      render 'edit'
+    end
   end
 
   private
