@@ -7,6 +7,7 @@ describe "Creating new user: " do
     expect(page).to have_text "Name"
     expect(page).to have_text "Email"
     expect(page).to have_text "Password"
+    e(page).to have_text "Username"
     expect(page).to have_text "Confirm Password"
   end
 
@@ -14,7 +15,7 @@ describe "Creating new user: " do
     visit signup_path
     click_button "Create Account"
     expect(current_path).to eq users_path
-    e(page).to have_text "4 errors"
+    e(page).to have_text "errors"
   end
 
   it "creates the user and redirects to user show with a success flash, if no issues" do
@@ -22,6 +23,7 @@ describe "Creating new user: " do
     fill_in "Name", with: "C"
     fill_in "Email", with: "w@w"
     fill_in "Password", with: "X"
+    fill_in "Username", with: "cwow"
     fill_in "Confirm Password", with: "X"
     click_button "Create Account"
     e(current_path).to eq user_path(User.first)

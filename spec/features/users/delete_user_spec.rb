@@ -12,6 +12,7 @@ describe "Deleting a user: " do
     e(page).to have_text "deleted"
     e(page).to have_text u2.name
     e(page).to have_text u2.email
+    e(page).to have_text u2.username
     e(page).to have_text "1 User"
   end
 

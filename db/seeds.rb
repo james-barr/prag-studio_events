@@ -60,18 +60,21 @@ User.create!([
   {
     name: "Don",
     email: "d@g",
+    username: "donnyboy",
     password: "x",
     password_confirmation: "x",
   },
   {
     name: "Al",
     email: "al@x",
+    username: "albundy",
     password: "x",
     password_confirmation: "x",
   },
   {
     name: "Gary",
     email: "g@y",
+    username: "garyguy",
     password: "y",
     password_confirmation: "y",
   },

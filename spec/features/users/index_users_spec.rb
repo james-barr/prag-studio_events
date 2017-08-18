@@ -13,6 +13,7 @@ describe "Index of all users: " do
     expect(page).to have_text u1.name
     expect(page).to have_text u1.email
     expect(page).to have_text u3.name
+    e(page).to have_text u2.username
     expect(page).to have_text u2.created_at_present
   end
 

@@ -5,4 +5,11 @@ class User < ApplicationRecord
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
                     format: { with: /\A\S+@\S+\z/ }
+  validates :username, presence: true,
+                      format: { with: /\A[a-zA-Z\d]+\z/i, message: "Letters and numbers, only."},
+                      uniqueness: { case_sensitive: false }
+
+  def gravatar_id
+    Digest::MD5::hexdigest(email.downcase)
+  end
 end

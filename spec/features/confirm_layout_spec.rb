@@ -13,7 +13,7 @@ describe "Confirming Footer" do
     expect(page).to have_selector('aside')
   end
 
-  it "checks the index" do
+  it "checks the event index" do
     visit events_url
 
     footer_structure
@@ -21,7 +21,7 @@ describe "Confirming Footer" do
     aside_structure
   end
 
-  it "checks the new" do
+  it "checks the event new" do
     visit new_event_url
 
     footer_structure
