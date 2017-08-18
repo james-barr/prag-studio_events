@@ -10,6 +10,7 @@ describe "Showing a user: " do
     expect(page).to have_text u.username
     expect(page).to have_text u.created_at_present
     e(page).to have_selector "p.profile_image"
+    e(page).to have_css ("img[src*='#{profile_image_for(u)}']")
   end
 
 end

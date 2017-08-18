@@ -85,4 +85,17 @@ describe "Navigating events" do
     e(current_path).to eq users_path
   end
 
+  it "header navigates from 'sign in' to signin_path" do
+    visit events_path
+    click_link "Sign in"
+    e(current_path).to eq signin_path
+  end
+
+  it "navigates from signin_path to signup" do
+    visit signin_path
+    click_link "Sign Up", href: signup_path
+    e(current_path).to eq signup_path
+  end
+
+
 end
