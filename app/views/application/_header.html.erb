@@ -1,6 +1,15 @@
 <header id="page-header">
   <h1 style="font-weight: 900;">Events</h1>
+  <% if current_user %>
+    <p>
+      <%= link_to current_user.name, current_user %>
+      <%= link_to "Sign out", users_path %>
+    </p>
+  <% else %>
   <p>
-    <%= link_to "Sign in", signin_path %>
+    <%= link_to "Sign In", signin_path %>
+    <br />
+    <%= link_to "Sign Up", signup_path %>
   </p>
+  <% end %>
 </header>

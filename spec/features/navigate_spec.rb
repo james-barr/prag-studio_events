@@ -74,7 +74,7 @@ describe "Navigating events" do
   it "navigates from events show to new user (aside)" do
     e = Event.create event_attributes
     visit event_path(e)
-    click_link "Signup"
+    click_link "Sign Up"
     e(current_path).to eq signup_path
   end
 
@@ -87,13 +87,13 @@ describe "Navigating events" do
 
   it "header navigates from 'sign in' to signin_path" do
     visit events_path
-    click_link "Sign in"
+    click_link "Sign In"
     e(current_path).to eq signin_path
   end
 
   it "navigates from signin_path to signup" do
     visit signin_path
-    click_link "Sign Up", href: signup_path
+    click_link "Sign Up", match: :first
     e(current_path).to eq signup_path
   end
 
