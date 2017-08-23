@@ -4,6 +4,7 @@ describe "Showing a user: " do
 
   it "shows all fields for user" do
     u = User.create! user_attributes
+    sign_in u
     visit user_path(u)
     expect(page).to have_text u.name
     expect(page).to have_text u.email

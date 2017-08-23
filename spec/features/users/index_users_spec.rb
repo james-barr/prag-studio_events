@@ -6,7 +6,7 @@ describe "Index of all users: " do
     u1 = User.create! user_attributes
     u2 = User.create! user_attributes2
     u3 = User.create! user_attributes3
-
+    sign_in u1
     visit users_url
 
     expect(page).to have_text "3 Users"

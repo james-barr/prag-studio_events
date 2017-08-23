@@ -46,7 +46,12 @@
 </article>
 
 <p>
-  <%= link_to "Delete User", user_path(@user), data: {:confirm => "Are you sure?"}, :method => :delete %>
+  <% if current_user? @user %>
+  <%= link_to "Delete User", @user,
+                            method: :delete,
+                            data: { confirm: "Are you sure?" } %>
+  <%= link_to "Edit Account", edit_user_path(@user) %>
+  <% end %>
 </p>
 
 <p>

@@ -55,7 +55,7 @@ describe "Navigating events" do
     e = Event.create event_attributes
     visit event_url(e)
     click_link "Register for event"
-    expect(current_path).to eq new_event_registration_path(e)
+    e(current_path).to eq new_event_registration_path(e)
   end
 
   it "navigates from new registration to registration index" do
@@ -68,7 +68,7 @@ describe "Navigating events" do
   it "navigates from events index to users index (aside)" do
     visit events_path
     click_link "All Users"
-    e(current_path).to eq(users_path)
+    e(current_path).to eq new_session_path
   end
 
   it "navigates from events show to new user (aside)" do
@@ -78,11 +78,11 @@ describe "Navigating events" do
     e(current_path).to eq signup_path
   end
 
-  it "the user form's cancel button brings the user back to the user index" do
+  it "the user form's cancel button brings the user back to root" do
     u = User.create! user_attributes
     visit new_user_path(u)
     click_link "Cancel"
-    e(current_path).to eq users_path
+    e(current_path).to eq root_path
   end
 
   it "header navigates from 'sign in' to signin_path" do
