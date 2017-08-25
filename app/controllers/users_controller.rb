@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_signin, except: [:new, :create]
-  before_action :require_correct_user, only: [:edit, :update, :destroy]
+  before_action :require_correct_user, only: [:edit, :update]
+  before_action :require_correct_user_or_admin, only: [:destroy]
 
   def index
     @users = User.all
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    session[:user_id] = nil
+    non_admin_logout
     redirect_to root_path, danger: "User successfully deleted."
   end
 
@@ -48,8 +49,21 @@ class UsersController < ApplicationController
 
   def require_correct_user
     @user = User.find(params[:id])
-    unless current_user? @user
-      redirect_to root_url
+    unless (current_user? @user)
+      redirect_to root_url, alert: "Unauthorized access"
+    end
+  end
+
+  def require_correct_user_or_admin
+    @user = User.find(params[:id])
+    unless (current_user? @user) || current_user_admin?
+      redirect_to root_url, alert: "Unauthorized access"
+    end
+  end
+
+  def non_admin_logout
+    unless current_user_admin?
+      session[:user_id] = nil
     end
   end
 

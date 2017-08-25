@@ -55,10 +55,14 @@
 </article>
 
 <%= register_link(@event) %>
+  <% if current_user_admin? %>
+    <p>
+      <%= link_to "Edit", edit_event_path(@event) %>
+      <%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure?"} %>
+    </p>
+  <% end %>
 
-<%= link_to "Edit", edit_event_path(@event) %>
-<%= link_to "Delete Event", event_path(@event), method: :delete, data: {confirm: "Are you sure?"} %>
-<br />
+
 <p>
   <%= link_to "Register for event", new_event_registration_path(@event) %>
 </p>

@@ -68,4 +68,29 @@ RSpec.describe UsersController, type: :controller do
 
   end
 
+  context "when signed in as an admin" do
+
+    before do
+      @admin = User.create! user_attributes2 admin: true
+      session[:user_id] = @admin.id
+    end
+
+    it "allows the admin to delete a user's account & doesn't sign admin out" do
+      expect{
+        delete :destroy, params: { id: @user }
+      }.to change(User, :count).by(-1)
+    end
+
+    it "does not allow the admin to edit a user's account" do
+      get :edit, params: { id: @user }
+      e(response).to redirect_to root_url
+    end
+
+    it "does not allow the admin to update a user's account" do
+      patch :update, params: { id: @user }
+      e(response).to redirect_to root_url
+    end
+
+  end
+
 end

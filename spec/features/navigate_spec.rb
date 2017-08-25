@@ -16,20 +16,26 @@ describe "Navigating events" do
     expect(current_path).to eq(event_path(event))
   end
 
-  it "allows navigation from show to edit" do
+  it "allows navigation from event show to event edit" do
+    u = User.create! user_attributes admin: true
+    sign_in u
     event = Event.create event_attributes
     visit event_path(event)
     click_link "Edit"
     expect(current_path).to eq(edit_event_path(event))
   end
 
-  it "navigates from index to new" do
+  it "navigates from events index to events new (as admin)" do
+    u = User.create! user_attributes admin: true
+    sign_in u
     visit events_path
     click_link "Add New Event"
     expect(current_path).to eq(new_event_path)
   end
 
-  it "navigates from new to index via the cancel button" do
+  it "navigates from new event to new index via the cancel button (as admin)" do
+    u = User.create! user_attributes admin: true
+    sign_in u
     visit new_event_url
     click_link "Cancel"
     expect(current_path).to eq(events_path)

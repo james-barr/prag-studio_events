@@ -58,24 +58,25 @@ r3 = e2.registrations.create!(
 
 User.create!([
   {
-    name: "Don",
-    email: "d@g",
-    username: "donnyboy",
+    name: "Admin",
+    email: "a@f",
+    username: "admin",
+    password: "x",
+    password_confirmation: "x",
+    admin: true
+  },
+  {
+    name: "Jon",
+    email: "j@f",
+    username: "jon",
     password: "x",
     password_confirmation: "x",
   },
   {
-    name: "Al",
-    email: "al@x",
-    username: "albundy",
+    name: "Bob",
+    email: "b@f",
+    username: "bob",
     password: "x",
     password_confirmation: "x",
-  },
-  {
-    name: "Gary",
-    email: "g@y",
-    username: "garyguy",
-    password: "y",
-    password_confirmation: "y",
   },
   ])
