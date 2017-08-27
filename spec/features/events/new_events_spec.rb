@@ -3,8 +3,8 @@ require "rails_helper"
 describe "Create an event" do
 
   before do
-    admin = User.create! user_attributes admin: true
-    sign_in admin
+    @admin = User.create! user_attributes admin: true
+    sign_in @admin
   end
 
   it "has all necessary fields, saves event, and shows the event's attributes (as admin)" do

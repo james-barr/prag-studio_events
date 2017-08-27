@@ -11,6 +11,7 @@ class RegistrationsController < ApplicationController
 
   def create
     @registration = @event.registrations.new(registration_params)
+    @registration.user_id = session[:user_id]
     if @registration.save
       redirect_to event_registrations_path(@event),
         notice: "Thanks, you're registered"

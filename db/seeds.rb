@@ -37,21 +37,15 @@ Event.create!([
 ])
 e1 = Event.find(1)
 e2 = Event.find(2)
-r = e1.registrations.create!(
-  name: "Shurley",
-  email: "shurley@gmail.com",
+r = e1.registrations.new(
   how_heard: Registration::How_heard_options.sample,
   location: "Carolina",
 )
-r2 = e1.registrations.create!(
-  name: "Mike",
-  email: "m@g.c",
+r2 = e1.registrations.new(
   how_heard: Registration::How_heard_options.sample,
   location: "NY",
 )
-r3 = e2.registrations.create!(
-  name: "Susan BeGood III",
-  email: "sb3@sb3.net",
+r3 = e2.registrations.new(
   how_heard: Registration::How_heard_options.sample,
   location: "Montana, CA",
 )
@@ -80,3 +74,9 @@ User.create!([
     password_confirmation: "x",
   },
   ])
+u1 = User.find(1)
+u2 = User.find(2)
+u3 = User.find(3)
+r.user = u1; r.save!
+r2.user = u2; r2.save!
+r3.user = u3; r3.save!

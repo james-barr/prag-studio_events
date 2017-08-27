@@ -8,7 +8,6 @@ describe "Deleting a user: " do
   end
 
   it "deletes a user from the db, redirects to root, displays a flash (not admin)" do
-    u2 = User.create! user_attributes2
     visit user_path(@u)
     click_link "Delete User"
     e(current_path).to eq root_path

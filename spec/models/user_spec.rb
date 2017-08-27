@@ -110,5 +110,19 @@ RSpec.describe User, type: :model do
     e(User.authenticate("x@x", "X")).to eq u
   end
 
+  it "has reviews" do
+    u = User.create! user_attributes
+    e1 = Event.new event_attributes
+    e2 = Event.new event_attributes2
+    r1 = e1.registrations.new registration_attributes
+    r1.user = u
+    r1.save!
+    r2 = e2.registrations.new registration_attributes
+    r2.user = u
+    r2.save!
+    e(u.registrations).to include r1
+    e(u.registrations).to include r2
+  end
+
 
 end

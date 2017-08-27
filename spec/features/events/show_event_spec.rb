@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 describe "viewing an individual event" do
+
+  before do
+    @u = User.create! user_attributes
+    sign_in @u
+  end
+
   it "shows the event's details" do
     event = Event.create event_attributes price: 10.00
-
     visit event_url(event)
-
     expect(page).to have_text event.name
     expect(page).to have_text event.location
     expect(page).to have_text event.description
@@ -16,17 +20,13 @@ describe "viewing an individual event" do
 
   it "shows the price if the price is not $0" do
     event = Event.create(event_attributes(price: 20.00))
-
     visit event_url(event)
-
     expect(page).to have_text("$20.00")
   end
 
   it "shows 'free' if the price is $0" do
     event = Event.create(event_attributes(price: 0.00))
-
     visit event_url(event)
-
     expect(page).to have_text("Free")
   end
 
@@ -42,13 +42,11 @@ describe "viewing an individual event" do
     e = Event.create event_attributes
     visit event_url(e)
     expect(page).to have_text "Register for "
-    fill_in "Name", with: "Carl"
-    fill_in "Email", with: "G@c.com"
     fill_in "Location", with: "NY"
     select 'Newsletter', :from => 'How heard'
     click_button "Create Registration"
     expect(current_path).to eq event_registrations_path(e)
-    expect(page).to have_link "Carl", href: "mailto:G@c.com"
+    expect(page).to have_link @u.name, href: "mailto:#{@u.email}"
     expect(page).to have_text "NY"
     expect(page).to have_text "Newsletter"
     expect(page).to have_selector "p.flash_notice"
@@ -67,12 +65,13 @@ describe "viewing an individual event" do
     e = Event.create event_attributes
     visit event_url(e)
     expect(page).to have_text "Register for Event"
-    expect(page).to have_selector "input#registration_name"
+    expect(page).to have_selector "input#registration_location"
   end
 
   it "displays sold out if there are not spots left" do
     e = Event.create event_attributes(capacity: 1)
-    r = e.registrations.create registration_attributes
+    r = e.registrations.new registration_attributes
+    r.user = @u; r.save!
     visit event_url(e)
     expect(page).to have_text "This event is full"
     expect(page).not_to have_text "Register for Event"

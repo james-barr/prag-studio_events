@@ -2,21 +2,22 @@ require "rails_helper"
 
 describe "An event" do
 
+  before do
+    @u = User.create! user_attributes
+  end
+
   it "is free if the price is $0" do
     event = Event.create(price: 0)
-
     expect(event.free?).to eq(true)
   end
 
   it "is not free if the price is non-$0" do
     event = Event.create(price: 20)
-
     expect(event.free?).to eq(false)
   end
 
   it "is free if the price is blank" do
     event = Event.create(price: nil)
-
     expect(event.free?).to eq(true)
   end
 
@@ -144,28 +145,34 @@ describe "An event" do
   end
 
   it "has many registrations" do
+    u2 = User.create! user_attributes2
     e = Event.new event_attributes
     r = e.registrations.new registration_attributes
     r2 = e.registrations.new registration_attributes2
+    r.user = @u; r.save!
+    r2.user = u2; r2.save!
     expect(e.registrations).to include r
     expect(e.registrations).to include r2
   end
 
   it "deletes associated registrations when event is deleted" do
-    e = Event.create event_attributes
-    r1 = e.registrations.create registration_attributes
+    e = Event.create! event_attributes
+    r1 = e.registrations.new registration_attributes
+    r1.user = @u; r1.save!
     expect {e.destroy}.to change(Registration, :count).by(-1)
   end
 
   it "calculates the number of spots left" do
     e = Event.create event_attributes
     r = e.registrations.new registration_attributes
+    r.user = @u; r.save!
     expect(e.spots_left).to eq 99
   end
 
   it "determines if there are any spots left" do
     e = Event.create event_attributes(capacity: 1)
-    r = e.registrations.create registration_attributes
+    r = e.registrations.new registration_attributes
+    r.user = @u; r.save!
     expect(e.sold_out?).to eq false
   end
 end

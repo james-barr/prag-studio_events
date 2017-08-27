@@ -42,8 +42,10 @@ describe "Navigating events" do
   end
 
   it "navigates between registrations index to event show" do
+    u = User.create! user_attributes
     event = Event.create! event_attributes
-    registration = event.registrations.create!  registration_attributes
+    r = event.registrations.new registration_attributes
+    r.user = u; r.save!
     visit event_registrations_url(event)
     click_link "Back to event"
     expect(current_path).to eq event_path(event)

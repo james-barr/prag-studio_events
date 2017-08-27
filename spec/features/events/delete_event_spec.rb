@@ -3,8 +3,8 @@ require "rails_helper"
 describe "Deleting an event" do
 
   before do
-    admin = User.create! user_attributes admin: true
-    sign_in admin
+    @admin = User.create! user_attributes admin: true
+    sign_in @admin
   end
 
   it "deletes an event and redirects to index (as admin)" do
