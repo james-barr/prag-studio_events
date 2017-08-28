@@ -5,7 +5,7 @@
 </header>
 
 <p class="profile_image">
-  <%= image_tag profile_image_for(@user), alt: "profile image" %>
+  <%= profile_image_for(@user) %>
 </p>
 
 <article>
@@ -54,5 +54,19 @@
   <% if current_user? @user %>
   <%= link_to "Edit Account", edit_user_path(@user) %>
   <% else %>
+  <% end %>
+</p>
+
+<p>
+  <% if @registrations.any? %>
+  <h3>Registered for: </h3>
+  <ul>
+    <% @registrations.each do |r| %>
+    <li>
+      <%= link_to r.event.name, r.event %>
+      (<%= time_ago_in_words(r.created_at) %>) ago
+    </li>
+    <% end %>
+  </ul>
   <% end %>
 </p>

@@ -29,8 +29,7 @@ describe "A registration" do
   it "validates with valid attributes" do
     u = User.create! user_attributes
     e = Event.new event_attributes
-    r = Registration.new registration_attributes(event: e)
-    r.user = u
+    r = Registration.new registration_attributes(event: e, user: u)
     r.valid?
     expect(r.errors.any?).to eq false
   end

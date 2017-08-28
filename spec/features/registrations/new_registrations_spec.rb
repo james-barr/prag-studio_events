@@ -15,7 +15,6 @@ describe "Create new registration for event - " do
     select 'Newsletter', :from => 'How heard'
     click_button "Create Registration"
     expect(current_path).to eq event_registrations_path(@e)
-    expect(page).to have_link @u.name, href: "mailto:#{@u.email}"
     expect(page).to have_text "NY"
     expect(page).to have_text "Newsletter"
     expect(page).to have_selector "p.flash_notice"

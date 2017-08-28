@@ -40,13 +40,12 @@ describe "viewing an individual event" do
   it "submits a valid registration form, displays a success message,
   and updates the page with the new registration" do
     e = Event.create event_attributes
-    visit event_url(e)
+    visit event_path(e)
     expect(page).to have_text "Register for "
     fill_in "Location", with: "NY"
     select 'Newsletter', :from => 'How heard'
     click_button "Create Registration"
     expect(current_path).to eq event_registrations_path(e)
-    expect(page).to have_link @u.name, href: "mailto:#{@u.email}"
     expect(page).to have_text "NY"
     expect(page).to have_text "Newsletter"
     expect(page).to have_selector "p.flash_notice"

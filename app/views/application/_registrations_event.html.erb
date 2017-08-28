@@ -6,6 +6,9 @@
   </header>
   <p>
     <% @registrations.each do |r| %>
+    <p class="profile_image">
+      <%= profile_image_for(r.user) %>
+    </p>
       <p>
         <table>
           <tr>
@@ -13,7 +16,15 @@
               Name
             </th>
             <td>
-              <%= mail_to r.user.email, r.user.name %>
+              <%= link_to r.user.email, r.user %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Username
+            </th>
+            <td>
+              <%= r.user.username %>
             </td>
           </tr>
           <tr>
@@ -34,6 +45,7 @@
           </tr>
         </table>
       </p>
+      <br />
     <% end %>
   </p>
 </article>
