@@ -124,5 +124,16 @@ RSpec.describe User, type: :model do
     e(u.registrations).to include r2
   end
 
+  it "likes many events" do
+    u = User.create! user_attributes
+    e = Event.create! event_attributes
+    e2 = Event.create! event_attributes2
+    l1 = e.likes.create! user: u
+    l2 = e2.likes.create! user: u
+    e(u.likes.count).to eq 2
+    expect(u.liked_events.first.name).to eq e.name
+    expect(u.liked_events.last.name).to eq e2.name
+  end
+
 
 end

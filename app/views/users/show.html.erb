@@ -58,6 +58,20 @@
 </p>
 
 <p>
+  <% if @liked_events.any? %>
+  <h3>Liked: </h3>
+  <ul>
+    <% @liked_events.each do |le| %>
+    <li>
+      <%= link_to le.name, le %>
+      (<%= time_ago_in_words(le.created_at) %>) ago
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
+</p>
+
+<p>
   <% if @registrations.any? %>
   <h3>Registered for: </h3>
   <ul>

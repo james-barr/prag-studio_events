@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @registrations = @user.registrations
+    @liked_events = @user.liked_events
   end
 
   def destroy

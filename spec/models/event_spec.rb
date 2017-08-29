@@ -175,4 +175,15 @@ describe "An event" do
     r.user = @u; r.save!
     expect(e.sold_out?).to eq false
   end
+
+  it "has many likers" do
+    u2 = User.create! user_attributes2
+    e = Event.create! event_attributes
+    l1 = e.likes.create! user: @u
+    l2 = e.likes.create! user: u2
+    e(e.likes.count).to eq 2
+    expect(e.likers.first.name).to eq @u.name
+    expect(e.likers.last.name).to eq u2.name
+  end
+
 end

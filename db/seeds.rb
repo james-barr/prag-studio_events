@@ -37,6 +37,8 @@ Event.create!([
 ])
 e1 = Event.find(1)
 e2 = Event.find(2)
+e3 = Event.find(3)
+
 r = e1.registrations.new(
   how_heard: Registration::How_heard_options.sample,
   location: "Carolina",
@@ -80,3 +82,8 @@ u3 = User.find(3)
 r.user = u1; r.save!
 r2.user = u2; r2.save!
 r3.user = u3; r3.save!
+l1 = e1.likers << u1
+l2 = e1.likers << u2
+l3 = e2.likers << u1
+l4 = e2.likers << u3
+l5 = e3.likers << u3
