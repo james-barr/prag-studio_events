@@ -77,6 +77,6 @@ describe "viewing an individual event" do
     expect(page).not_to have_selector "input#registration_name"
   end
 
-
+  
 
 end

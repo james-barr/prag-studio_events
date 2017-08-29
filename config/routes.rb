@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :likes
+
   get "signin" => "sessions#new"
 
   resource :session
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :registrations
+    resources :likes
   end
 
 
