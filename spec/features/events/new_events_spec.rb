@@ -13,9 +13,9 @@ describe "Create an event" do
   it "has all necessary fields, saves event, and shows the event's attributes (as admin)" do
     visit new_event_url
     e(page).to have_text "Add New Event"
-    fill_in "Name", with: "New Event Title"
+    fill_in "Name", with: "New Event"
     fill_in "Description", with: "Some new event with a description that's long enough to satisfy validation."
-    fill_in "Location", with: "Denver, CO"
+    fill_in "Location", with: "CO"
     fill_in "Price", with: 150.00
     select (Time.now.year - 1).to_s, :from => "event_starts_at_1i"
     attach_file "Image", "#{Rails.root}/app/assets/images/placeholder.png"
@@ -25,12 +25,15 @@ describe "Create an event" do
     check @c3.name
     click_button "Create Event"
     expect(current_path).to eq(event_path(Event.last))
-    e(page).to have_text "New Event Title"
+    e(page).to have_text "New Event"
     e(page).to have_text "Some new event"
-    e(page).to have_text "Denver, CO"
+    e(page).to have_text "CO"
     e(page).to have_selector "p.flash_notice"
-    e(page).to have_text "C1"
-    e(page).to have_text "C2"
+    within "aside#sidebar" do
+      e(page).to have_text "C1"
+      e(page).to have_text "C2"
+    end
+    e(page).to have_title "Events - New Event"
   end
 
   it "does not save a new invalid event (as admin)" do

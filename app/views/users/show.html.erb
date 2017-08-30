@@ -1,3 +1,5 @@
+<% title(@user.name) %>
+
 <header>
   <h2>
     User name: <%= @user.name %>
@@ -57,7 +59,7 @@
   <% end %>
 </p>
 
-<p>
+<% content_for :side do %>
   <% if @liked_events.any? %>
   <h3>Liked: </h3>
   <ul>
@@ -69,7 +71,7 @@
     <% end %>
   </ul>
   <% end %>
-</p>
+<% end %>
 
 <p>
   <% if @registrations.any? %>

@@ -31,5 +31,7 @@ describe "Creating new user: " do
     e(page).to have_link "C"
     e(page).not_to have_link "Sign In"
     e(page).not_to have_link "Signup"
+    e(page).not_to have_text "Liked:"
+    e(page).to have_title "Events - C"
   end
 end

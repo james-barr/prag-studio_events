@@ -17,4 +17,5 @@ class LikesController < ApplicationController
     redirect_to @event, notice: "Unliked"
   end
 
+
 end

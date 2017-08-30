@@ -1,3 +1,5 @@
+<% title("#{@event.name} in #{@event.location}") %>
+
 <article class="event">
   <header>
     <h1>
@@ -24,19 +26,6 @@
         <%= pluralize @likers.size, "like" %>
       </td>
     </tr>
-    <% if @likers.any? %>
-      <% @likers.each do |liker| %>
-    <tr>
-      <th>
-        Likers
-      </th>
-      <td>
-        <%= profile_image_for liker, size: 30 %>
-        <%= liker.name %>
-      </td>
-    </tr>
-      <% end %>
-    <% end %>
     <tr>
       <th>
         Location
@@ -97,6 +86,18 @@
   <%= link_to "Register for event", new_event_registration_path(@event) %>
 </p>
 
+<% content_for :side do %>
+<% if @likers.any? %>
+<h3>Likers</h3>
+  <% @likers.each do |liker| %>
+<ul>
+  <li>
+    <%= profile_image_for liker, size: 30 %>
+    <%= liker.name %>
+  </li>
+</ul>
+  <% end %>
+<% end %>
 <h3>Categories</h3>
 <ul>
   <% @categories.each do |c| %>
@@ -106,3 +107,4 @@
     <% end %>
   </td>
 </ul>
+<% end %>
