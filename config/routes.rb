@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :categorizations
+  resources :categories
   get "signin" => "sessions#new"
 
   resource :session

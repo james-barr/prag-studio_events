@@ -87,3 +87,29 @@ l2 = e1.likers << u2
 l3 = e2.likers << u1
 l4 = e2.likers << u3
 l5 = e3.likers << u3
+
+Category.create! ([
+  {
+    name: "Social"
+  },
+  {
+    name: "Programming"
+  },
+  {
+    name: "Nature"
+  },
+  {
+    name: "Training"
+  }
+])
+c1 = Category.find 1
+c2 = Category.find 2
+c3 = Category.find 3
+c4 = Category.find 4
+
+
+cg1 = e1.categorizations.create! category: c1
+cg2 = e1.categorizations.create! category: c3
+cg3 = e2.categorizations.create! category: c2
+cg4 = e3.categorizations.create! category: c2
+cg5 = e3.categorizations.create! category: c4

@@ -17,8 +17,4 @@ class LikesController < ApplicationController
     redirect_to @event, notice: "Unliked"
   end
 
-private
-  def set_event
-    @event = Event.find(params[:event_id])
-  end
 end

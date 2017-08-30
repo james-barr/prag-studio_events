@@ -22,11 +22,13 @@
     <%= f.label :image %>
     <%= f.file_field :image %>
     <br />
-    Current Image: 
+    Current Image:
     <%= image_for(@event) %>
     <br />
     <%= f.label :capacity %>
     <%= f.number_field :capacity %>
+    <br />
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
     <br />
     <%= f.submit %>
     <%= link_to "Cancel", events_path %>
