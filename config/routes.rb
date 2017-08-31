@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :users
   root "events#index"
 
+
+  get "events/filter/:scope" => "events#index", as: :filtered_events
+
   resources :events do
     resources :registrations
     resources :likes

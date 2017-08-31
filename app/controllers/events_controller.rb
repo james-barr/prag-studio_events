@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :require_admin, except: [:index, :show]
 
   def index
-    @events = Event.upcoming
+    @events = Event.send(events_scope)
   end
 
   def show
@@ -54,5 +54,12 @@ class EventsController < ApplicationController
      params.require(:event).permit(:name, :description, :location, :price, :starts_at, :image, :capacity, category_ids: [])
   end
 
+  def events_scope
+    if params[:scope].in? %w(past free recent past_n_days costs_less_than costs_more_than)
+      params[:scope]
+    else
+      :upcoming
+    end
+  end
 
 end

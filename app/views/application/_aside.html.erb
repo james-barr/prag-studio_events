@@ -3,12 +3,22 @@
     <h3>Events</h3>
     <ul>
       <li>
-        <%= link_to "All Events", events_path %>
+        <%= nav_link_to 'Upcoming Events', events_path %>
       </li>
       <% if current_user_admin? %>
       <li>
-        <%= link_to 'Add New Event', new_event_path %>
+        <%= nav_link_to 'Add New Event', new_event_path %>
       </li>
+      <li>
+        <%= nav_link_to 'Past Events', filtered_events_path(:past) %>
+      </li>
+      <li>
+        <%= nav_link_to 'Free Events', filtered_events_path(:free) %>
+      </li>
+      <li>
+        <%= nav_link_to 'Recent Events', filtered_events_path(:recent) %>
+      </li>
+
       <% end %>
     </ul>
     <h3>Users</h3>

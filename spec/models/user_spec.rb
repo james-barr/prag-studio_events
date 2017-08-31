@@ -131,8 +131,8 @@ RSpec.describe User, type: :model do
     l1 = e.likes.create! user: u
     l2 = e2.likes.create! user: u
     e(u.likes.count).to eq 2
-    expect(u.liked_events.first.name).to eq e.name
-    expect(u.liked_events.last.name).to eq e2.name
+    expect(u.liked_events).to include e
+    expect(u.liked_events).to include e2
   end
 
 

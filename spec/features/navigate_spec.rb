@@ -10,7 +10,7 @@ describe "Navigating events" do
 
   it "allows navigation from the show page to the index page" do
     visit event_url @e
-    click_link "All Events"
+    click_link "Upcoming Events"
     expect(current_path).to eq(events_path)
   end
 
