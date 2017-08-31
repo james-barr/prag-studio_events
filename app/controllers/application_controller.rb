@@ -33,9 +33,6 @@ private
     current_user?(user) || current_user.admin?
   end
 
-  def set_event
-    @event = Event.find(params[:event_id])
-  end
 
   helper_method :current_user
   helper_method :current_user?

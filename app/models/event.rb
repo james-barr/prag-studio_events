@@ -7,13 +7,15 @@ class Event < ApplicationRecord
 
   has_attached_file :image
 
-  validates :name, :location, presence: true
+  before_validation :generate_slug
 
+  validates :name, :location, presence: true, uniqueness: true
+  validates :slug, uniqueness: true
   validates :description, length: {minimum: 25, maximum: 150}
-
   validates :price, numericality: {greater_than_or_equal_to: 0}
 
   validates :capacity, numericality: {only_integer: true, greater_than: 0}
+
 
   validates_attachment :image,
     :content_type => { :content_type => ['image/jpeg', 'image/png'] },
@@ -39,7 +41,13 @@ class Event < ApplicationRecord
     spots_left + 1 == 0
   end
 
+  def to_param
+    slug
+  end
 
+  def generate_slug
+    self.slug ||= name.parameterize if name
+  end
 
 
 end

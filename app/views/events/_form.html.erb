@@ -27,6 +27,11 @@
     <br />
     <%= f.label :capacity %>
     <%= f.number_field :capacity %>
+    <% unless @event.new_record? %>
+    <%= f.label :slug %>
+    <%= f.text_field :slug %>
+    <br />
+    <% end %>
     <br />
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
     <br />

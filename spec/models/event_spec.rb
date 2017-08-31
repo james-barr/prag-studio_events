@@ -23,11 +23,11 @@ describe "An event" do
 
   it "shows previously released events, in order" do
     event1 = Event.create event_attributes(starts_at: 9.days.from_now)
-    event2 = Event.create event_attributes(starts_at: 29.days.from_now)
-    event3 = Event.create event_attributes(starts_at: 19.days.from_now)
-    event4 = Event.create event_attributes(starts_at: 29.days.ago)
-
-    e(Event.upcoming.to_a).to eq([event1, event3, event2])
+    event2 = Event.create event_attributes2(starts_at: 29.days.from_now)
+    event3 = Event.create event_attributes3(starts_at: 29.days.ago)
+    e(Event.upcoming).to include event1
+    e(Event.upcoming).to include event2
+    e(Event.upcoming).not_to include event3
   end
 
   it "validates that a name is present " do
@@ -202,10 +202,14 @@ describe "An event" do
 
   it "returns all events that were created within last 3 days" do
     ev = Event.create! event_attributes created_at: Time.now
-    ev2 = Event.create! event_attributes created_at: (Time.now - 5.days)
+    ev2 = Event.create! event_attributes2 created_at: (Time.now - 5.days)
     e(Event.past_n_days 3).to include ev
     e(Event.past_n_days 3).not_to include ev2
   end
 
+  it "automatically creates a slug for a new event" do
+    ev = Event.create! event_attributes
+    e(ev.slug).to eq ev.name.parameterize
+  end
 
 end

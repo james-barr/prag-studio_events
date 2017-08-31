@@ -1,13 +1,13 @@
 class EventsController < ApplicationController
   before_action :require_signin, except: [:index, :show]
   before_action :require_admin, except: [:index, :show]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
     @events = Event.send(events_scope)
   end
 
   def show
-    @event = Event.find(params[:id])
     @registration = @event.registrations.new
     @likers = @event.likers
     if current_user
@@ -17,11 +17,9 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
     if @event.update(event_params)
       redirect_to @event, notice: "Event successfully updated"
     else
@@ -43,7 +41,6 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
     redirect_to events_path, danger: "Event successfully deleted"
   end
@@ -60,6 +57,10 @@ class EventsController < ApplicationController
     else
       :upcoming
     end
+  end
+
+  def set_event
+    @event = Event.find_by!(slug: params[:id])
   end
 
 end

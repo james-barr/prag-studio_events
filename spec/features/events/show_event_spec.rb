@@ -77,6 +77,10 @@ describe "viewing an individual event" do
     e(page).not_to have_selector "input#registration_name"
   end
 
-
+  it "has a SEO-friendly URL" do
+    ev = Event.create! event_attributes
+    visit event_path(ev)
+    e(current_path).to eq "/events/#{ev.slug}"
+  end
 
 end
